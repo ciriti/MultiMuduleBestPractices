@@ -2,11 +2,12 @@ package com.example.posttemplate.posts.ui
 
 import com.example.posttemplate.posts.domain.model.Post
 
-data class HomeState(
-    val isLoading: Boolean = false,
-    val posts: List<Post> = emptyList(),
-    val errorMessage: String? = null
-)
+sealed class HomeState {
+    object Loading : HomeState()
+    data class Success(val posts: List<Post>) : HomeState()
+    data class Error(val errorMessage: String) : HomeState()
+    object Empty : HomeState()
+}
 
 sealed class HomeIntent {
     object LoadPosts : HomeIntent()

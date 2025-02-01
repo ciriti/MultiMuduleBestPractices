@@ -26,8 +26,6 @@ class App : Application() {
                 permissionHandlerModule,
                 sdkModule
             )
-
-
         }
     }
 }

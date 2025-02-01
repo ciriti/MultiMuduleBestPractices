@@ -4,6 +4,7 @@ import com.example.posttemplate.data.local.PostDao
 import com.example.posttemplate.data.local.PostEntity
 import com.example.posttemplate.data.models.PostDto
 import com.example.posttemplate.data.remote.ApiService
+import com.example.posttemplate.util.printCache
 
 interface PostsRepository {
     suspend fun getPosts(): Result<List<PostDto>>
@@ -26,6 +27,14 @@ private class PostsRepositoryImpl(
             val cachedPosts = postDao.getAllPosts().map { it.toDto() }
             if (cachedPosts.isNotEmpty()) {
                 return@runCatching cachedPosts
+            }
+
+            val response = apiService.getPosts1().apply { printCache("Photos") }
+            if (response.isSuccessful) {
+                val photos: List<PostDto> = response.body() ?: emptyList()
+                photos
+            } else {
+                throw RuntimeException("")
             }
 
             // Fetch from remote

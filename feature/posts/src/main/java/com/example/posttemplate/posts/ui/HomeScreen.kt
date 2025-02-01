@@ -15,10 +15,11 @@ fun HomeScreen(
     onRetry: () -> Unit,
     onNavigateToDetails: (Int) -> Unit
 ) {
-    when {
-        state.isLoading -> LoadingIndicator()
-        state.errorMessage != null -> Text("Error: ${state.errorMessage}")
-        else -> LazyColumn {
+    when (state) {
+        is HomeState.Loading -> LoadingIndicator()
+        is HomeState.Error -> Text("Error: ${state.errorMessage}")
+        is HomeState.Empty -> Text("No posts available")
+        is HomeState.Success -> LazyColumn {
             items(state.posts) { post ->
                 PostItem(post = post) { onNavigateToDetails(post.id) }
             }
@@ -30,8 +31,7 @@ fun HomeScreen(
 @Preview(showBackground = true)
 fun HomeScreenPreview() {
     HomeScreen(
-        state = HomeState(
-            isLoading = false,
+        state = HomeState.Success(
             posts = listOf(
                 Post(
                     id = 1,
@@ -46,7 +46,6 @@ fun HomeScreenPreview() {
                     authorId = 2
                 )
             ),
-            errorMessage = null
         ),
         onRetry = {},
         onNavigateToDetails = {}

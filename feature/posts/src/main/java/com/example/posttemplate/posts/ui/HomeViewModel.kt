@@ -13,7 +13,7 @@ class HomeViewModel(
     private val service: PostsService
 ) : BaseViewModel<HomeState, HomeEffect, HomeIntent>() {
 
-    private val _state = MutableStateFlow(HomeState())
+    private val _state = MutableStateFlow<HomeState>(HomeState.Empty)
     override val state: StateFlow<HomeState> = _state
 
     private val _effect = MutableSharedFlow<HomeEffect>()
@@ -28,16 +28,18 @@ class HomeViewModel(
 
     private fun loadPosts() {
         viewModelScope.launch {
-            _state.value = _state.value.copy(isLoading = true)
+            _state.value = HomeState.Loading
             service.getPosts().fold(
                 onFailure = { throwable ->
-                    _state.value =
-                        _state.value.copy(isLoading = false, errorMessage = throwable.message)
+                    _state.value = HomeState.Error(throwable.message ?: "Unknown error")
                     _effect.emit(HomeEffect.ShowError(throwable.message ?: "Unknown error"))
                 },
                 onSuccess = { posts ->
-                    _state.value =
-                        _state.value.copy(isLoading = false, posts = posts, errorMessage = null)
+                    _state.value =if (posts.isEmpty()) {
+                        HomeState.Empty
+                    } else {
+                        HomeState.Success(posts)
+                    }
                 }
             )
         }
