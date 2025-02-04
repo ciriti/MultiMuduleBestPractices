@@ -60,6 +60,9 @@ dependencies {
 
     implementation(libs.androidx.core.splashscreen)
 
+    implementation(libs.androidx.ui.tooling.preview)
+    debugImplementation(libs.androidx.ui.tooling)
+
     implementation(libs.koin.core)
     implementation(libs.koin.androidx.compose.navigation)
     implementation(project.dependencies.platform(libs.koin.bom))
