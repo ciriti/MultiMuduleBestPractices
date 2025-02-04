@@ -19,9 +19,12 @@ import androidx.compose.ui.unit.sp
 import com.example.posttemplate.posts.domain.model.Post
 
 @Composable
-fun PostItem(post: Post, onClick: () -> Unit) {
+fun PostItem(
+    post: Post,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .padding(8.dp)
             .fillMaxWidth()
             .clickable { onClick() },
