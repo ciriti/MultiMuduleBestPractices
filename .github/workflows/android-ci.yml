@@ -49,8 +49,8 @@ jobs:
       - name: Upload Build Outputs
         uses: actions/upload-artifact@v4
         with:
-          name: build-outputs-${{ github.sha }}
-          path: app/build/outputs
+          name: build-outputs-${{ matrix.target }}-${{ github.run_id }}
+          path: app/build/outputs/${{ matrix.target }}
 
   lint:
     name: Lint Check
