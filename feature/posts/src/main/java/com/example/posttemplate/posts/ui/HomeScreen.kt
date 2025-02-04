@@ -4,6 +4,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.posttemplate.posts.domain.model.Post
 import com.example.posttemplate.posts.ui.components.PostItem
@@ -12,13 +13,16 @@ import com.example.posttemplate.ui.components.LoadingIndicator
 @Composable
 fun HomeScreen(
     state: HomeState,
+    modifier: Modifier = Modifier,
     onRetry: () -> Unit,
     onNavigateToDetails: (Int) -> Unit
 ) {
     when {
         state.isLoading -> LoadingIndicator()
         state.errorMessage != null -> Text("Error: ${state.errorMessage}")
-        else -> LazyColumn {
+        else -> LazyColumn(
+            modifier = modifier
+        ) {
             items(state.posts) { post ->
                 PostItem(post = post) { onNavigateToDetails(post.id) }
             }
