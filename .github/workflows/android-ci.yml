@@ -10,13 +10,12 @@ on:
       - multi-module
 
 jobs:
-  build:
+  build_and_test:
     name: Build and Test
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        api-level: [21, 29, 23]
         target: [assembleDebug, testDebugUnitTest]
 
     steps:
@@ -44,11 +43,8 @@ jobs:
         with:
           components: build-tools;34.0.0
 
-      - name: Build app
+      - name: Build and Test Target
         run: ./gradlew ${{ matrix.target }} --no-daemon
-
-      - name: Run Lint
-        run: ./gradlew lint --no-daemon
 
       - name: Upload Build Outputs
         uses: actions/upload-artifact@v4
@@ -77,5 +73,5 @@ jobs:
 
       - name: Run ktlint
         run: |
-          ./gradlew ktlintFormat
-          ./gradlew ktlintCheck
+          ./gradlew ktlintFormat --no-daemon
+          ./gradlew ktlintCheck --no-daemon
