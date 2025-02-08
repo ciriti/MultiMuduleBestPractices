@@ -66,6 +66,13 @@ fun DrawerContent(
             isSelected = currentDestination == Route.Posts.route,
             onClick = { onNavigate(Route.Posts.route) }
         )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        DrawerItem(
+            label = "Account",
+            isSelected = currentDestination == Route.Account.route,
+            onClick = { onNavigate(Route.Account.route) }
+        )
 
         DrawerItem(
             label = "Sign Out",

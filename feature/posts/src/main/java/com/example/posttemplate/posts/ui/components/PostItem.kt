@@ -22,7 +22,8 @@ import com.example.posttemplate.posts.domain.model.Post
 fun PostItem(
     post: Post,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit) {
+    onClick: () -> Unit
+) {
     Card(
         modifier = modifier
             .padding(8.dp)

@@ -1,6 +1,7 @@
 package com.example.posttemplate
 
 import android.app.Application
+import com.example.posttemplate.account.di.accountModule
 import com.example.posttemplate.data.di.dataModule
 import com.example.posttemplate.di.appModule
 import com.example.posttemplate.auth.di.authModule
@@ -20,6 +21,7 @@ class App : Application() {
             modules(profileModule)
             modules(postsModule)
             modules(appModule)
+            modules(accountModule)
         }
     }
 }
