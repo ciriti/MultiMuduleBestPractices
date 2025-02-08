@@ -5,34 +5,28 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.navArgument
+import com.example.posttemplate.account.ui.AccountViewModel
+import com.example.posttemplate.account.ui.navigation.accountRoute
+import com.example.posttemplate.auth.ui.AuthenticationViewModel
+import com.example.posttemplate.auth.ui.navigation.authenticationRoute
+import com.example.posttemplate.posts.ui.HomeViewModel
+import com.example.posttemplate.posts.ui.navigation.postsRoute
+import com.example.posttemplate.profile.ui.ProfileViewModel
+import com.example.posttemplate.profile.ui.navigation.profileRoute
 import com.example.posttemplate.ui.components.AdaptiveNavigationDrawer
 import com.example.posttemplate.ui.components.DisplayAlertDialog
 import com.example.posttemplate.ui.components.DrawerContent
 import com.example.posttemplate.ui.components.TopAppBar
 import com.example.posttemplate.ui.components.isLargeScreen
-import com.example.posttemplate.auth.ui.AuthenticationViewModel
-import com.example.posttemplate.auth.ui.navigation.authenticationRoute
-import com.example.posttemplate.posts.ui.HomeViewModel
-import com.example.posttemplate.posts.ui.navigation.postsRoute
-import com.example.posttemplate.profile.ui.ProfileIntent
-import com.example.posttemplate.profile.ui.ProfileScreen
-import com.example.posttemplate.profile.ui.ProfileViewModel
-import com.example.posttemplate.profile.ui.navigation.profileRoute
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
@@ -43,6 +37,7 @@ fun SetupNavGraph(
     drawerViewModel: DrawerViewModel = koinInject<DrawerViewModel>(),
     authViewModel: AuthenticationViewModel = koinInject<AuthenticationViewModel>(),
     profileViewModel: ProfileViewModel = koinInject<ProfileViewModel>(),
+    accountViewModel: AccountViewModel = koinInject<AccountViewModel>(),
     homeViewModel: HomeViewModel = koinInject<HomeViewModel>(),
 ) {
     val isLargeScreen = isLargeScreen()
@@ -59,10 +54,21 @@ fun SetupNavGraph(
                 currentDestination = currentDestination,
                 onNavigate = { route ->
                     scope.launch { drawerState.close() }
-                    navController.navigate(route) {
-                        popUpTo(navController.graph.startDestinationId) { inclusive = false }
-                        launchSingleTop = true
+                    if (route == Route.Account.route) {
+                        val accountId = 1
+                            navController.navigate("${Route.Account.route}/$accountId") {
+                                popUpTo(navController.graph.startDestinationId) {
+                                    inclusive = false
+                                }
+                                launchSingleTop = true
+                            }
+                    } else {
+                        navController.navigate(route) {
+                            popUpTo(navController.graph.startDestinationId) { inclusive = false }
+                            launchSingleTop = true
+                        }
                     }
+
                 },
                 onLogOut = {
                     signOutDialogOpened = true
@@ -110,6 +116,7 @@ fun SetupNavGraph(
                 authenticationRoute(navController, authViewModel)
                 postsRoute(navController, homeViewModel)
                 profileRoute(profileViewModel)
+                accountRoute(accountViewModel)
             }
         }
     }

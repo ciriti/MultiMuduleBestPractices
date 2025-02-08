@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.posttemplate.profile"
+    namespace = "com.example.posttemplate.account"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
