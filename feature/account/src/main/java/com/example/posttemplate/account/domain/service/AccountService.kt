@@ -1,6 +1,6 @@
 package com.example.posttemplate.account.domain.service
 
-import com.example.posttemplate.account.domain.model.Account
+import Account
 
 interface AccountService {
     suspend fun getAccountById(id: Int): Result<Account>

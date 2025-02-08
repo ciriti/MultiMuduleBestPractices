@@ -1,6 +1,6 @@
 package com.example.posttemplate.account.data.repository
 
-import com.example.posttemplate.account.domain.model.Account
+import Account
 import com.example.posttemplate.account.domain.repository.AccountRepository
 
 fun AccountRepository.Companion.create(): AccountRepository = AccountRepositoryImpl()

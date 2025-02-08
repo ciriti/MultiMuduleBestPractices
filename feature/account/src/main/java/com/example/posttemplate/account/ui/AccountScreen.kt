@@ -18,7 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.posttemplate.account.domain.model.Account
+import Account
 
 @Composable
 fun AccountScreen(
@@ -70,11 +70,13 @@ fun AccountScreen(
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(onClick = {
-                        onUpdate(account.copy(
-                            fullName = fullName,
-                            phone = phone,
-                            address = address
-                        ))
+                        onUpdate(
+                            account.copy(
+                                fullName = fullName,
+                                phone = phone,
+                                address = address
+                            )
+                        )
                     }) {
                         Text("Update")
                     }

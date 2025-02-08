@@ -1,9 +1,9 @@
 package com.example.posttemplate.account.data.repository
 
-import com.example.posttemplate.account.domain.model.Account
+import Account
 import com.example.posttemplate.account.domain.repository.AccountRepository
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.*
+import org.junit.Assert.* // ktlint-disable
 import org.junit.Before
 import org.junit.Test
 

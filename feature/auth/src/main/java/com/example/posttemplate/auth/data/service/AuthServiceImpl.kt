@@ -8,13 +8,13 @@ fun AuthService.Companion.create(authRepository: AuthRepository): AuthService = 
 
 private class AuthServiceImpl(
     private val authRepository: AuthRepository,
-    private val firebaseAuth: FirebaseAuth? = null, // not nullable in production
+    private val firebaseAuth: FirebaseAuth? = null // not nullable in production
 ) : AuthService {
 
     override suspend fun login(email: String, password: String): Result<Boolean> {
         return runCatching {
 //            val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
-            val isSuccess = true //result.user != null
+            val isSuccess = true // result.user != null
             authRepository.setUserSignedIn(isSuccess)
             isSuccess
         }
@@ -46,7 +46,7 @@ private class AuthServiceImpl(
         return runCatching {
 //            val credential = GoogleAuthProvider.getCredential(token, null)
 //            val result = firebaseAuth.signInWithCredential(credential).await()
-            val isSuccess = true //result.user != null
+            val isSuccess = true // result.user != null
             authRepository.setUserSignedIn(isSuccess)
             isSuccess
         }

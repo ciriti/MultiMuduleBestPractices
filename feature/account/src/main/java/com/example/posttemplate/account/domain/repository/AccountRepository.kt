@@ -1,6 +1,6 @@
 package com.example.posttemplate.account.domain.repository
 
-import com.example.posttemplate.account.domain.model.Account
+import Account
 
 interface AccountRepository {
     suspend fun getAccountById(id: Int): Result<Account>

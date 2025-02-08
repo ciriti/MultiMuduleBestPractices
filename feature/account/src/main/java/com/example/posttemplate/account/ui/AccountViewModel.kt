@@ -1,7 +1,7 @@
 package com.example.posttemplate.account.ui
 
 import androidx.lifecycle.viewModelScope
-import com.example.posttemplate.account.domain.model.Account
+import Account
 import com.example.posttemplate.account.domain.service.AccountService
 import com.example.posttemplate.ui.components.BaseViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

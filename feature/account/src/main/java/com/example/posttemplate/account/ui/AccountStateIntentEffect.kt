@@ -1,6 +1,6 @@
 package com.example.posttemplate.account.ui
 
-import com.example.posttemplate.account.domain.model.Account
+import Account
 
 data class AccountState(
     val isLoading: Boolean = false,
