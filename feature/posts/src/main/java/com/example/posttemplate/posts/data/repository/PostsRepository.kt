@@ -4,13 +4,7 @@ import com.example.posttemplate.data.local.PostDao
 import com.example.posttemplate.data.local.PostEntity
 import com.example.posttemplate.data.models.PostDto
 import com.example.posttemplate.data.remote.ApiService
-
-interface PostsRepository {
-    suspend fun getPosts(): Result<List<PostDto>>
-    suspend fun getPostById(id: Int): Result<PostDto>
-
-    companion object
-}
+import com.example.posttemplate.posts.domain.repository.PostsRepository
 
 fun PostsRepository.Companion.create(apiService: ApiService, postDao: PostDao): PostsRepository =
     PostsRepositoryImpl(apiService, postDao)

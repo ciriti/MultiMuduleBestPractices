@@ -1,8 +1,8 @@
 package com.example.posttemplate.posts.domain.service
 
 import com.example.posttemplate.data.models.PostDto
-import com.example.posttemplate.posts.data.repository.PostsRepository
 import com.example.posttemplate.posts.domain.model.Post
+import com.example.posttemplate.posts.domain.repository.PostsRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
