@@ -46,22 +46,32 @@
 
 The application follows **Clean Architecture** principles, organized into feature modules. Each module is further divided into **data**, **domain**, and **presentation layers** for better separation of concerns.
 
+### Project Architecture
+
+![Project Architecture](docs/docs/ArchitectureModule.png)
+
+### Module Architecture
+
+![Module Architecture](docs/docs/docs/MultiModule.png)
+
 ---
 
 ### Layers
 
 1. **Presentation Layer**:
-    - UI screens and components.
-    - ViewModels for state management and business logic handling.
+
+   - UI screens and components.
+   - ViewModels for state management and business logic handling.
 
 2. **Domain Layer**:
-    - Defines core application logic.
-    - Includes use cases, state models, and data transformation logic.
+
+   - Defines core application logic.
+   - Includes use cases, state models, and data transformation logic.
 
 3. **Data Layer**:
-    - Responsible for data management.
-    - Local (Room database) and remote (API services) sources.
-    - Repository pattern used for data abstraction.
+   - Responsible for data management.
+   - Local (Room database) and remote (API services) sources.
+   - Repository pattern used for data abstraction.
 
 ---
 
@@ -76,25 +86,27 @@ The application follows **Clean Architecture** principles, organized into featur
 
 - Shared logic used across feature modules.
 - **Core/Data**:
-    - `local`: Room database entities, DAOs, and database configuration.
-    - `remote`: Retrofit services and network clients.
-    - `repository`: Shared repositories (e.g., `AuthRepository`).
+  - `local`: Room database entities, DAOs, and database configuration.
+  - `remote`: Retrofit services and network clients.
+  - `repository`: Shared repositories (e.g., `AuthRepository`).
 - **Core/UI**:
-    - Shared UI components (e.g., navigation drawer, loading indicators).
+  - Shared UI components (e.g., navigation drawer, loading indicators).
 
 #### **Feature Modules**
 
 - **Auth Module**:
-    - Handles authentication (login, logout, session management).
-    - Contains its own `AuthRepository`, ViewModels, and UI screens (e.g., `AuthenticationScreen`).
+
+  - Handles authentication (login, logout, session management).
+  - Contains its own `AuthRepository`, ViewModels, and UI screens (e.g., `AuthenticationScreen`).
 
 - **Posts Module**:
-    - Displays user posts.
-    - Includes ViewModels (`HomeViewModel`), repositories, and data models for posts.
+
+  - Displays user posts.
+  - Includes ViewModels (`HomeViewModel`), repositories, and data models for posts.
 
 - **Profile Module**:
-    - Displays user profile details.
-    - Includes ViewModels (`ProfileViewModel`), repositories, and data models for user information.
+  - Displays user profile details.
+  - Includes ViewModels (`ProfileViewModel`), repositories, and data models for user information.
 
 ---
 
