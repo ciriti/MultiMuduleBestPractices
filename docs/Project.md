@@ -46,6 +46,14 @@
 
 Die Anwendung folgt den Prinzipien der **Clean Architecture** und ist in Feature-Module organisiert. Jedes Modul ist weiter in **Daten-, Domain- und Präsentationsebenen** unterteilt, um eine bessere Trennung der Verantwortlichkeiten zu gewährleisten.
 
+### Project Architecture
+
+![Project Architecture](docs/MultiModule.png)
+
+### Module Architecture
+
+![Module Architecture](docs/ArchitectureModule.png)
+
 ---
 
 ### Ebenen
