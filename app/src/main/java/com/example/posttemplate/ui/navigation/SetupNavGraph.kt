@@ -56,12 +56,10 @@ fun SetupNavGraph(
                     scope.launch { drawerState.close() }
                     if (route == Route.Account.route) {
                         val accountId = 1
-                            navController.navigate("${Route.Account.route}/$accountId") {
-                                popUpTo(navController.graph.startDestinationId) {
-                                    inclusive = false
-                                }
-                                launchSingleTop = true
-                            }
+                        navController.navigate("${Route.Account.route}/$accountId") {
+                            popUpTo(navController.graph.startDestinationId) { inclusive = false }
+                            launchSingleTop = true
+                        }
                     } else {
                         navController.navigate(route) {
                             popUpTo(navController.graph.startDestinationId) { inclusive = false }
