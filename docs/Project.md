@@ -48,11 +48,11 @@ Die Anwendung folgt den Prinzipien der **Clean Architecture** und ist in Feature
 
 ### Project Architecture
 
-![Project Architecture](docs/MultiModule.png)
+![Project Architecture](MultiModule.png)
 
 ### Module Architecture
 
-![Module Architecture](docs/ArchitectureModule.png)
+![Module Architecture](ArchitectureModule.png)
 
 ---
 
