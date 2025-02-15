@@ -56,7 +56,7 @@ class PostsServiceTest {
 
         // Assert
         assert(result.isFailure)
-//        assertEquals(exception, (result as Result.Failure).value.cause)
+        assertEquals(exception.message, result.exceptionOrNull()?.message)
     }
 
     @Test
@@ -83,6 +83,6 @@ class PostsServiceTest {
 
         // Assert
         assert(result.isFailure)
-//        assertEquals(exception, (result as Result.failure).value.cause)
+        assertEquals(exception.message, result.exceptionOrNull()?.message)
     }
 }
