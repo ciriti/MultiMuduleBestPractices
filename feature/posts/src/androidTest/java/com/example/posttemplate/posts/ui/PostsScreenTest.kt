@@ -17,11 +17,7 @@ class PostsScreenTest {
     @Test
     fun testLoadingStateDisplaysLoadingIndicator() {
         // Arrange
-        val state = HomeState(
-            isLoading = true,
-            posts = emptyList(),
-            errorMessage = null
-        )
+        val state = HomeState.Loading
 
         // Act
         composeTestRule.setContent {
@@ -40,11 +36,7 @@ class PostsScreenTest {
     fun testErrorStateDisplaysErrorMessage() {
         // Arrange
         val errorMessage = "An error occurred"
-        val state = HomeState(
-            isLoading = false,
-            posts = emptyList(),
-            errorMessage = errorMessage
-        )
+        val state = HomeState.Error(errorMessage)
 
         // Act
         composeTestRule.setContent {
@@ -66,11 +58,7 @@ class PostsScreenTest {
             Post(id = 1, title = "First Post", body = "Body of the first post", authorId = 1),
             Post(id = 2, title = "Second Post", body = "Body of the second post", authorId = 2)
         )
-        val state = HomeState(
-            isLoading = false,
-            posts = posts,
-            errorMessage = null
-        )
+        val state = HomeState.Success(posts)
 
         // Act
         composeTestRule.setContent {
@@ -93,11 +81,7 @@ class PostsScreenTest {
             Post(id = 1, title = "First Post", body = "Body of the first post", authorId = 1)
         )
         var clickedPostId: Int? = null
-        val state = HomeState(
-            isLoading = false,
-            posts = posts,
-            errorMessage = null
-        )
+        val state = HomeState.Success(posts)
 
         composeTestRule.setContent {
             HomeScreen(

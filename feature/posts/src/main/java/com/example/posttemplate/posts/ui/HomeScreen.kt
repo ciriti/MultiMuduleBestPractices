@@ -17,12 +17,11 @@ fun HomeScreen(
     onRetry: () -> Unit,
     onNavigateToDetails: (Int) -> Unit
 ) {
-    when {
-        state.isLoading -> LoadingIndicator()
-        state.errorMessage != null -> Text("Error: ${state.errorMessage}")
-        else -> LazyColumn(
-            modifier = modifier
-        ) {
+
+    when (state) {
+        is HomeState.Loading -> LoadingIndicator()
+        is HomeState.Error -> Text("Error: ${state.message}")
+        is HomeState.Success -> LazyColumn {
             items(state.posts) { post ->
                 PostItem(post = post) { onNavigateToDetails(post.id) }
             }
@@ -30,13 +29,12 @@ fun HomeScreen(
     }
 }
 
-@Composable
 @Preview(showBackground = true)
+@Composable
 fun HomeScreenPreview() {
     HomeScreen(
-        state = HomeState(
-            isLoading = false,
-            posts = listOf(
+        state = HomeState.Success(
+            listOf(
                 Post(
                     id = 1,
                     title = "First Post",
@@ -49,8 +47,7 @@ fun HomeScreenPreview() {
                     body = "This is the body of the second post.",
                     authorId = 2
                 )
-            ),
-            errorMessage = null
+            )
         ),
         onRetry = {},
         onNavigateToDetails = {}

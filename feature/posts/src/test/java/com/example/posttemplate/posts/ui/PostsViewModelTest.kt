@@ -20,7 +20,8 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class PostsViewModelTest {
 
-    private val mockPostService: com.example.posttemplate.posts.domain.service.PostsService = mockk()
+    private val mockPostService: com.example.posttemplate.posts.domain.service.PostsService =
+        mockk()
     private lateinit var viewModel: HomeViewModel
     private val testDispatcher = StandardTestDispatcher()
     private val testScope = TestScope(testDispatcher)
@@ -53,16 +54,9 @@ class PostsViewModelTest {
             viewModel.handleIntent(HomeIntent.LoadPosts)
 
             // Assert
-            assertEquals(false, states.awaitItem().isLoading) // State during loading
-            assertEquals(true, states.awaitItem().isLoading) // State during loading
-            assertEquals(
-                HomeState(
-                    isLoading = false,
-                    posts = mockPosts,
-                    errorMessage = null
-                ),
-                states.awaitItem()
-            )
+            assertEquals(HomeState.Success(emptyList()), states.awaitItem()) // State during loading
+            assertEquals(HomeState.Loading, states.awaitItem()) // State during loading
+            assertEquals(HomeState.Success(mockPosts), states.awaitItem())
 
             coVerify { mockPostService.getPosts() }
 
@@ -86,27 +80,15 @@ class PostsViewModelTest {
 
             // Assert
             assertEquals(
-                HomeState(
-                    isLoading = false,
-                    posts = emptyList(),
-                    errorMessage = null
-                ),
+                HomeState.Success(emptyList()),
                 states.awaitItem()
             )
             assertEquals(
-                HomeState(
-                    isLoading = true,
-                    posts = emptyList(),
-                    errorMessage = null
-                ),
+                HomeState.Loading,
                 states.awaitItem()
             )
             assertEquals(
-                HomeState(
-                    isLoading = false,
-                    posts = emptyList(),
-                    errorMessage = errorMessage
-                ),
+                HomeState.Error(errorMessage),
                 states.awaitItem()
             )
             assertEquals(HomeEffect.ShowError(errorMessage), effects.awaitItem())
